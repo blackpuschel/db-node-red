@@ -1,0 +1,17 @@
+{
+  "name": "@blackpuschel/node-red-deutsche-bahn",
+  "version": "0.0.1",
+  "description": "Retrieve real time information about the trains of Deutsche Bahn.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+
+  "node-red": {
+    "nodes": {
+        "deutsche-bahn-stops": "deutsche-bahn-stops/deutsche-bahn-stops.js",
+        "deutsche-bahn-trips": "deutsche-bahn-trips/deutsche-bahn-trips.js"
+    }
+  }
+}
