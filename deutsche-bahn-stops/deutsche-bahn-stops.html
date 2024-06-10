@@ -1,0 +1,148 @@
+<script type="text/javascript">
+    RED.nodes.registerType('deutsche-bahn-stops', {
+        category: "network",
+        defaults: {
+            name: {value: ""},
+            stopID: {value: "", required: true},
+
+            when: {value: "now",
+                validate:RED.validators.regex(/.*/)
+            },
+            directionType: {value: "", required: true},
+            direction: {value: ""},
+            duration: {value: "10"},
+            maxResults: {value: "5"},
+
+            language: {value: "en"},
+
+            includeNationalExpress: {value: true}, 
+            includeNational: {value: true},
+            includeRegionalExpress: {value: true},
+            includeRegional: {value: true},
+            includeSuburban: {value: true},
+            includeBus: {value: true},
+            includeFerry: {value: true},
+            includeSubway: {value: true},
+            includeTram : {value: true},
+            includeTaxi : {value: true}
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function() {
+            return this.name||"deutsche-bahn-stops";
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="deutsche-bahn-stops">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-stopID"><i class="fa fa-id-card-o" aria-hidden="true"></i> Stop ID</label>
+        <input type="number" id="node-input-stopID">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-when"><i class="fa fa-clock-o" aria-hidden="true"></i> When</label>
+        <input type="text" id="node-input-when">
+    </div>
+    <div class="form-tips"><b>Formats:</b>
+        <label>parse-human-relative-time</label> 
+        <label>ISO 8601 date/time string</label> 
+        <label>UNIX timestamp</label> 
+    </div>
+
+    <div class="form-row">
+    <label for="node-input-directionType"><i class="fa fa-bars"></i> Direction Type</label>
+    <select id="node-input-directionType">
+        <option value="" disabled selected>Choose an option</option>
+        <option value="departures">Departures</option>
+        <option value="arrivals">Arrivals</option>
+    </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-direction"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Direction</label>
+        <input type="text" id="node-input-direction">
+    </div>
+    <div class="form-tips"><b>IBNR:</b> Internationale Bahnhofsnummer</div>
+
+    <div class="form-row">
+        <label for="node-input-duration"><i class="fa fa-clock-o" aria-hidden="true"></i> Duration</label>
+        <input type="number" id="node-input-duration">  
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-maxResults"><i class="fa fa-tachometer" aria-hidden="true"></i> Max Results</label>
+        <input type="number" id="node-input-maxResults">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-language"><i class="fa fa-language" aria-hidden="true"></i> Language</label>
+        <input type="text" id="node-input-language">
+    </div>
+    <div class="form-tips"><b>Format:</b> ISO 639.</div>
+
+    <div class="form-row">
+        Include these means of transportation:<br/>
+        <table style="margin: auto;">
+            <tr>
+                <th style="width: 5%;"></th>
+                <th style="width: 30%;"></th>
+                <th style="width: 10%;"></th>
+                <th style="width: 10%;"></th>
+                <th style="width: 5%;"></th>
+                <th style="width: 30%;"></th>
+                <th style="width: 10%;"></th>
+            </tr>
+            <tr>
+                <td><i class="fa fa-train" aria-hidden="true"></i></td>
+                <td>NationalExpress :</td>
+                <td ><input type="checkbox" id="node-input-includeNationalExpress"></td>
+                <td></td>
+                <td style="margin-left: auto;"><i class="fa fa-train" aria-hidden="true"></i></td>
+                <td>National :</td>
+                <td><input type="checkbox" id="node-input-includeNational"></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-train" aria-hidden="true"></i></td>
+                <td>Regional Express :</td>
+                <td><input type="checkbox" id="node-input-includeRegionalExpress"></td>
+                <td></td>
+                <td><i class="fa fa-train" aria-hidden="true"></i></td>
+                <td>Regional : </td>
+                <td><input type="checkbox" id="node-input-includeRegional"></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-train" aria-hidden="true"></i></td>
+                <td>Suburban :</td>
+                <td><input type="checkbox" id="node-input-includeSuburban"></td>
+                <td></td>
+                <td><i class="fa fa-bus" aria-hidden="true"></i></td>
+                <td>Bus : </td>
+                <td><input type="checkbox" id="node-input-includeBus"></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-ship" aria-hidden="true"></i></td>
+                <td>Ferry :</td>
+                <td><input type="checkbox" id="node-input-includeFerry"></td>
+                <td></td>
+                <td><i class="fa fa-subway" aria-hidden="true"></i></td>
+                <td>Subway : </td>
+                <td><input type="checkbox" id="node-input-includeSubway"></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-subway" aria-hidden="true"></i></td>
+                <td>Tram :</td>
+                <td><input type="checkbox" id="node-input-includeTram"></td>
+                <td></td>
+                <td><i class="fa fa-taxi" aria-hidden="true"></i></td>
+                <td>Taxi : </td>
+                <td><input type="checkbox" id="node-input-includeTaxi"></td>
+            </tr>
+        </table>
+    </div>
+</script>

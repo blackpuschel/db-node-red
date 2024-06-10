@@ -1,29 +1,28 @@
 const conf = new Map();
 
 module.exports = function(RED) {
-    function dbTripsNode(config) {
+    function dbStationsNode(config) {
         RED.nodes.createNode(this, config);
 
-        conf.set("tripID", config.tripID);
-        conf.set("stopovers", config.stopovers);
-        conf.set("polyline", config.polyline);
-        conf.set("language", config.language);
+        conf.set("stationName", config.stationName);
+        conf.set("maxResults", config.maxResults);
+        conf.set("fuzzy", config.fuzzy);
+        conf.set("autocomplete", config.autocomplete);
 
         var node = this;
         node.on('input', onInput);
     }
-    RED.nodes.registerType("deutsche-bahn-trips", dbTripsNode);
+    RED.nodes.registerType("deutsche-bahn-stations", dbStationsNode);
 }
 
 async function onInput(msg, send, done) {
     handlePayload(msg.payload);
 
-    let requestURL = `https://v6.db.transport.rest/trips/${encodeURIComponent(conf.get("tripID"))}?`;
+    let requestURL = `https://v6.db.transport.rest/stations?query=${encodeURIComponent(conf.get("stationName"))}`;
 
-    requestURL += `stopover=${conf.get("stopover")}`;
-    requestURL += `&polyline=${conf.get("polyline")}`;
-    requestURL += `&language=${conf.get("language")}`;
-
+    requestURL += `&limit=${conf.get("maxResults")}`;
+    requestURL += `&fuzzy=${conf.get("fuzzy")}`;
+    requestURL += `&completion=${conf.get("autocomplete")}`;
 
     let response = await fetch(requestURL)
         .then(response => {

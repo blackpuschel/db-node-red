@@ -1,0 +1,47 @@
+<script type="text/javascript">
+    RED.nodes.registerType('deutsche-bahn-trips', {
+        category: "network",
+        defaults: {
+            name: {value: ""},
+            tripID: {value: "", required: true},
+            stopovers: {value: true},
+            polyline: {value: false},
+            language: {value: "en"},
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function() {
+            return this.name||"deutsche-bahn-trips";
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="deutsche-bahn-trips">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-tripID"><i class="fa fa-id-card-o" aria-hidden="true"></i> Trip ID</label>
+        <input type="number" id="node-input-tripID">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-stopovers"><i class="fa fa-id-card-o" aria-hidden="true"></i> Stop Overs</label>
+        <input type="checkbox" id="node-input-stopovers">
+    </div>
+    <div class="form-tips"><b>Info:</b> Fetch & parse stops between start and end of trip?</div>
+
+    <div class="form-row">
+        <label for="node-input-polyline"><i class="fa fa-id-card-o" aria-hidden="true"></i> Polyline</label>
+        <input type="checkbox" id="node-input-polyline">
+    </div>
+    <div class="form-tips"><b>Info:</b> Fetch & parse the geographic shape of the trip?</div>
+
+    <div class="form-row">
+        <label for="node-input-language"><i class="fa fa-language" aria-hidden="true"></i> Language</label>
+        <input type="text" id="node-input-language">
+    </div>
+    <div class="form-tips"><b>Format:</b> ISO 639.</div>
+</script>

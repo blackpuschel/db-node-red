@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    RED.nodes.registerType('deutsche-bahn-stations', {
+        category: "network",
+        defaults: {
+            name: {value: ""},
+            stationName: {value: "", required: true},
+            maxResults: {value: 5},
+            fuzzy: {value: false},
+            autocomplete: {value: true},
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function() {
+            return this.name||"deutsche-bahn-stations";
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="deutsche-bahn-stations">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-stationName"><i class="fa fa-id-card-o" aria-hidden="true"></i> Station Name</label>
+        <input type="text" id="node-input-stationName">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-maxResults"><i class="fa fa-id-card-o" aria-hidden="true"></i> Max Results</label>
+        <input type="number" id="node-input-maxResults">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-fuzzy"><i class="fa fa-id-card-o" aria-hidden="true"></i> Fuzzy</label>
+        <input type="checkbox" id="node-input-fuzzy">
+    </div>
+    <div class="form-tips"><b>Info:</b> Find stations despite typos.</div>
+
+    <div class="form-row">
+        <label for="node-input-autocomplete"><i class="fa fa-language" aria-hidden="true"></i> Auto Complete</label>
+        <input type="checkbox" id="node-input-autocomplete">
+    </div>
+</script>
