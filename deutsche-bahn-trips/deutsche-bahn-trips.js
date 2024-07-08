@@ -44,7 +44,6 @@ async function onInput(msg, send, done) {
 
 function handlePayload(payload) {
     Object.keys(payload).forEach((key) => {
-        console.log(key);
         if (conf.has(key)) {
             conf.set(key, payload[key]);
         }

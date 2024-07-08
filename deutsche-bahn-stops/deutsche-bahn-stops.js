@@ -52,7 +52,7 @@ async function onInput(msg, send, done) {
     requestURL += `&tram=${conf.get("includeTram")}`;
     requestURL += `&taxi=${conf.get("includeTaxi")}`;
 
-
+    
     let response = await fetch(requestURL)
         .then(response => {
             return response.json();
@@ -72,7 +72,6 @@ async function onInput(msg, send, done) {
 
 function handlePayload(payload) {
     Object.keys(payload).forEach((key) => {
-        console.log(key);
         if (conf.has(key)) {
             conf.set(key, payload[key]);
         }
